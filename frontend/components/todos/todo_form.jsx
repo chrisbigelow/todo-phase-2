@@ -1,13 +1,13 @@
 import React from 'react';
-import {uniqueId} from '../../util/util';
+
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: uniqueId(),
       title: '',
       body: '',
+      done: false
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeBody = this.handleChangeBody.bind(this);
@@ -28,12 +28,7 @@ class TodoForm extends React.Component {
 
   getFormData(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state);
-    this.setState({
-      id: uniqueId(),
-      title: '',
-      body: '',
-    });
+    console.log(this.props.onSubmit({todo: this.state}).then(() => this.setState({title: '', body: ''})).then(this.props.clearErrors));
   }
 
   render() {

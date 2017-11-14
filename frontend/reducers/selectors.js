@@ -13,3 +13,7 @@ export const stepsByTodoId = (state, todoId) => {
   }
   return steps;
 };
+
+export const errors = (state) => {
+  return state.errors;
+};
