@@ -1,4 +1,4 @@
-import { apiFetchTodos, apiCreateTodo } from '../util/todo_api_util';
+import { apiFetchTodos, apiCreateTodo, apiUpdateTodo, apiDeleteTodo } from '../util/todo_api_util';
 import { receiveErrors } from './errors_actions';
 
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
@@ -20,6 +20,7 @@ export const removeTodo = (todo) => ({
   todo
 });
 
+
 export const fetchTodos = () => {
   return (dispatch) => {
     return apiFetchTodos()
@@ -29,11 +30,24 @@ export const fetchTodos = () => {
   };
 };
 
-export const createTodo = (todo) => (dispatch) => {
-  const apiCAll = apiCreateTodo(todo);
-  console.log( apiCAll);
-    return apiCAll.then(
+export const createTodo = (todo) => (dispatch) => (
+  apiCreateTodo(todo).then(
       newTodo => dispatch(receiveTodo(newTodo)),
       err => dispatch(receiveErrors(err.responseJSON))
-    );
-  };
+    )
+  );
+
+
+export const updateTodo = (todo) => (dispatch) => (
+   apiUpdateTodo(todo).then(
+     newTodo => dispatch(receiveTodo(newTodo)),
+     err => dispatch(receiveErrors(err.responseJSON))
+   )
+);
+
+export const deleteTodo = (todo) => (dispatch) => (
+  apiDeleteTodo(todo).then(
+     newTodo => dispatch(removeTodo(newTodo)),
+     err => dispatch(receiveErrors(err.responseJSON))
+   )
+);

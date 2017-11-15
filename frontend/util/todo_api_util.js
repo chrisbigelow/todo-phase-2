@@ -12,3 +12,19 @@ export const apiCreateTodo = function createTodo(todo) {
     data: todo
   });
 };
+
+export const apiUpdateTodo = function updateTodo(todo) {
+  return $.ajax({
+    url: `http://localhost:3000/api/todos/${todo.todo.id}`,
+    method: 'PATCH',
+    data: todo
+  });
+};
+
+export const apiDeleteTodo = function deleteTodo(todo) {
+  return $.ajax({
+    url: `http://localhost:3000/api/todos/${todo.id}`,
+    method: 'DELETE',
+    data: todo
+  });
+};

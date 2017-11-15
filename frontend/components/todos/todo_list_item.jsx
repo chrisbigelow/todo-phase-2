@@ -1,9 +1,9 @@
 import React from 'react';
 import TodoDetailViewContainer from './todo_detail_view_container';
 
-const doneHelper = (todo, receiveTodo) => {
+const doneHelper = (todo, updateTodo) => {
   todo.done = !todo.done;
-  receiveTodo(todo);
+  updateTodo({"todo": todo});
 };
 
 class TodoListItem extends React.Component {
@@ -24,11 +24,11 @@ class TodoListItem extends React.Component {
   }
 
   render() {
-    const {todo, receiveTodo} = this.props;
+    const {todo, updateTodo} = this.props;
     return (
       <li>
       <button onClick={this.showDetail} >{todo.title}</button>
-      <button type="button" onClick={() => doneHelper(todo, receiveTodo)}>{todo.done ? "Undo" : "Done"}</button>
+      <button type="button" onClick={() => doneHelper(todo, updateTodo)}>{todo.done ? "Undo" : "Done"}</button>
       {this.state.showDetail ? <TodoDetailViewContainer todo={todo}/> : '' }
       </li>
     );

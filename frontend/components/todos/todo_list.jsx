@@ -13,12 +13,12 @@ class TodoList extends React.Component{
   }
 
   render () {
-    const {todos, createTodo, removeTodo} = this.props;
+    const {todos, createTodo, removeTodo, updateTodo} = this.props;
     return (
       <div>
         <ul> {this.props.errors.map(error => <li key={error}>{error}</li>)} </ul>
         <ul>
-          {todos.map((todo) => <TodoListItem key={todo.id} todo={todo} receiveTodo={createTodo}/>) }
+          {todos.map((todo) => <TodoListItem key={todo.id} todo={todo} updateTodo={updateTodo} />) }
         </ul>
         <TodoForm onSubmit={createTodo} clearErrors={this.props.clearErrors}/>
      </div>
